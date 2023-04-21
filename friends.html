@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        br {
+            content: "";
+            display: block;
+            height: 2em;
+        }
+
+        brshort {
+            content: "";
+            display: block;
+            height: 10px;
+        }
+
+        li {
+            display: none;
+        }
+
+        input[type=text] {
+            width: 33%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 5px 5px;
+            background-repeat: no-repeat;
+            margin-top: 20px;
+            margin-left: 250px;
+            padding: 12px 20px 12px 35px;
+        }
+
+        .bluep {
+            color: blue;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .redp {
+            color: orangered;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .friend-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-around;
+            justify-content: space-around;
+            width: 750px;
+        }
+
+        .fiend {
+            display: flex;
+            width: 350px;
+            height: 180px;
+            box-sizing: border-box;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            vertical-align: middle;
+        }
+
+        .friendpic {
+            width: 120px;
+            height: 120px;
+            float: left;
+            background-image: url("profilbild.png");
+            box-sizing: border-box;
+            border: 3px solid red;
+            margin-top: 10px;
+            margin-left: 0px;
+        }
+
+        .friendspro {
+            width: 220px;
+            height: 160px;
+            float: right;
+            box-sizing: border-box;
+            border: 2px solid grey;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .friendsshot {
+            font-size: 10px;
+            font-style: italic;
+            font-family: 'Times New Roman';
+        }
+
+        .pie {
+            width: 60px;
+            height: 60px;
+            background-image: conic-gradient(orange 60%, blue 10%, green 30%);
+            border-radius: 10%
+        }
+
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            flex-wrap: wrap;
+            flex-direction: column;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #ffa500;
+            overflow-x: hidden;
+            padding-top: 20px;
+            font-family: Impact;
+        }
+
+        /*.sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #ffffff;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #000;
+                } */
+
+        .sidecolred {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolred:hover {
+                color: red;
+            }
+
+        .sidecolblue {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolblue:hover {
+                color: blue;
+            }
+
+        .sidecolpurple {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolpurple:hover {
+                color: purple;
+            }
+
+        .sidecolgreen {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolgreen:hover {
+                color: green;
+            }
+
+        .sidecolblack {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolblack:hover {
+                color: black;
+            }
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+            font-size: 28px; /* Increased text to enable scrolling */
+            padding: 5px 10px;
+        }
+
+        .topping {
+            width: 100%;
+            height: 160px;
+            background-color: #ffa500;
+            box-sizing: border-box;
+            margin-top: -10px;
+        }
+
+        .sidemenu {
+            width: 50px;
+            height: 50px;
+            background-image: url("sidemenu.png");
+            background-repeat: no-repeat;
+            box-sizing: border-box;
+            border: 3px solid white;
+            border-radius: 4px;
+            transition: width 2s, height 4s;
+            transition-duration: 375ms;
+            margin-top: -50px;
+            margin-left: 800px;
+        }
+
+            .sidemenu:hover {
+                width: 120px;
+                height: 120px;
+                background-color: #ffa500;
+                box-sizing: border-box;
+                border: 3px solid black;
+                border-radius: 4px;
+                display: inline-block;
+            }
+
+                .sidemenu:hover li {
+                    transition-delay: 2s;
+                }
+
+        .sidemenu-content {
+            display: none;
+            position: absolute;
+            margin-top: 80px;
+        }
+
+        .sidemenu:hover .sidemenu-content {
+            transition-delay: 2s;
+            display: block;
+        }
+
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href="Main.html"><img src="interactLogo.png" width="160" height="160" /></a>
+        <a class="sidecolblue" href="#groups">Groups</a>
+        <a class="sidecolgreen" href="#topic">Topic</a>
+        <a class="sidecolpurple" href="#messenger">Messenger</a>
+        <a class="sidecolblack" href="#contact">Contact</a>
+    </div>
+    <section>
+        <div class="topping">
+            <form>
+                <input type="text" name="search" placeholder="Search..">
+            </form>
+            <div class="sidemenu">
+                <div class="sidemenu-content">
+                    <a href="#darkmode"><img src="darkmode.png" width="32" height="32" /></a>
+                    <a href="#settings"><img src="settings.png" width="32" height="32" /></a>
+                    <a href="#logout"><img src="logout.png" width="32" height="32" /></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main">
+        <div>
+            <canvas id="myChart" style="width:1%;max-width:600px"></canvas>
+
+            <script>
+                var xValues = ["Friends", "Groups", "Topics"];
+                var yValues = [55, 49, 44];
+                var barColors = [
+                    "#ff0000",
+                    "#0000ff",
+                    "#00ff00",
+                ];
+
+                new Chart("myChart", {
+                    type: "doughnut",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                 
+                        }
+                    }
+                });
+            </script>
+
+        </div>
+        <div class="friend-container">
+            <div class="fiend">
+                <div class="friendpic"></div>
+                <div class="friendspro">
+                    <div class="friendsshot">
+                        Name: Max Mustermann
+                        Geboren: 1.1.2000
+                        wohnt: hier !
+                        <div class="pie"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fiend">
+                <div class="friendpic"></div>
+                <div class="friendspro">
+                    <p>Name: Max Mustermann</p>
+                </div>
+            </div>
+            <div class="fiend">
+                <div class="friendpic"></div>
+                <div class="friendspro">
+                    <p>Name: Max Mustermann</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
