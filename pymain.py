@@ -1,16 +1,12 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 from cmath import sqrt
-from curses import doupdate
 from datetime import datetime
 import http.server
-from pydoc_data import topics
 import socketserver
 import cgi
 import cgitb
 import os
-from syslog import LOG_LOCAL3
-from xmlrpc.client import DateTime
 import mysql.connector
 import time
 
@@ -21,7 +17,7 @@ class session:
         self.strttime = time
         self.client_IP = socketserver.get_request()
         self.usrSesprot = "/<logON"+ " " + str(self.client_IP) + datetime.date + " " + time.time() + " " + ">"
-        return file2Str("main.html").format(**locals()), self.usrSesprot
+        return file2Str("main.html").format(**locals()), self.usrSesprot                        ##remember #main.html
 
 class database:
     def getValue(self, Value, where, rowid):
@@ -107,7 +103,7 @@ def vote(usrcheck, topcheck,poscheck, form, usrSesport):
     postID = form.submit
     if form.check == True:
         poscheck = poscheck +1;
-        usrSesport = usrSesport + "</vote" + postID + "check" + " " + DateTime.date() + " " + time.time() +"  /" 
+        usrSesport = usrSesport + "</vote" + postID + "check" + " " + datetime.date() + " " + time.time() +"  /" 
 
     if form.bait == True:
         check = check + 1;
@@ -154,12 +150,12 @@ def comm(primekey_id, usrSesprot):
     usrcomm = form.getValue("comment")
     itnbr = topics.getValue(id)
     envior = topics.getValue(primekey_id)
-    delta_envoir = envior +  "</comm" + str(itnbr) + " " + DateTime.date() + " " + time.time() +"  >" 
+    delta_envoir = envior +  "</comm" + str(itnbr) + " " + datetime.date() +"  >" 
     topics.setValue(primekey_id, delta_envoir)
     topiccont = open("val",'w')
     topiccont.write(usrcomm)
     topiccont.close()
-    usrSesprot = usrSesprot + "</comm" + str(itnbr) + " " + DateTime.date() + " " + time.time() +"  >" 
+    usrSesprot = usrSesprot + "</comm" + str(itnbr) + " " + datetime.date() +"  >" 
     return file2Str("comments.html").format(**locals()), usrSesprot
 
 def prot2time(protocol, arg, t_from, t_to):    ## arg to set time least, first , 5 or between 
@@ -214,6 +210,26 @@ def prot2time(protocol, arg, t_from, t_to):    ## arg to set time least, first ,
                relation_frt_dte.year = time_relation.year(t_from, time) 
             if relation_frt_dte.year == time_relation.year(t_from, time) and relation_frt_dte.mouth == time_relation.mouth(t_from, time) and relation_frt_dte.day == time_relation.day(t_from, time) and relation_frt_dte.hour == time_relation.hour(t_from, time) and relation_frt_dte.minute > time_relation.minute(t_from, time):
                relation_frt_dte.year = time_relation.year(t_from, time)   
+            if relation_frt_dte.year == time_relation.year(t_from, time) and relation_frt_dte.mouth == time_relation.mouth(t_from, time) and relation_frt_dte.day == time_relation.day(t_from, time) and relation_frt_dte.hour == time_relation.hour(t_from, time) and relation_frt_dte.minute > time_relation.minute(t_from, time) and relation_frt_dte.second > time_relation.second(t_from, time):
+               relation_frt_dte.year = time_relation.year(t_from, time)
+            if relation_frt_dte.year == time_relation.year(t_from, time) and relation_frt_dte.mouth == time_relation.mouth(t_from, time) and relation_frt_dte.day == time_relation.day(t_from, time) and relation_frt_dte.hour == time_relation.hour(t_from, time) and relation_frt_dte.minute > time_relation.minute(t_from, time) and relation_frt_dte.second > time_relation.second(t_from, time) and relation_frt_dte.microsecond > time_relation.microsecond(t_from, time):
+               relation_frt_dte.year = time_relation.year(t_from, time)
+
+
+            if relation_snd_dte.year > time_relation.year(t_to, time):                    
+                relation_snd_dte.year = time_relation.year(t_to, time)
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth > time_relation.mouth(t_to, time):
+                relation_snd_dte.year = time_relation.year(t_to, time)
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth == time_relation.mouth(t_to, time) and relation_snd_dte.day > time_relation.day(t_to, time):
+                relation_snd_dte.year = time_relation.year(t_to, time)
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth == time_relation.mouth(t_to, time) and relation_snd_dte.day == time_relation.day(t_to, time) and relation_snd_dte.hour > time_relation.hour(t_to, time):
+               relation_snd_dte.year = time_relation.year(t_to, time) 
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth == time_relation.mouth(t_to, time) and relation_snd_dte.day == time_relation.day(t_to, time) and relation_snd_dte.hour == time_relation.hour(t_to, time) and relation_snd_dte.minute > time_relation.minute(t_to, time):
+               relation_snd_dte.year = time_relation.year(t_to, time)   
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth == time_relation.mouth(t_to, time) and relation_snd_dte.day == time_relation.day(t_to, time) and relation_snd_dte.hour == time_relation.hour(t_to, time) and relation_snd_dte.minute > time_relation.minute(t_to, time) and relation_snd_dte.second > time_relation.second(t_to, time):
+               relation_snd_dte.year = time_relation.year(t_to, time)
+            if relation_snd_dte.year == time_relation.year(t_to, time) and relation_snd_dte.mouth == time_relation.mouth(t_to, time) and relation_snd_dte.day == time_relation.day(t_to, time) and relation_snd_dte.hour == time_relation.hour(t_to, time) and relation_snd_dte.minute > time_relation.minute(t_to, time) and relation_snd_dte.second > time_relation.second(t_to, time) and relation_snd_dte.microsecond > time_relation.microsecond(t_to, time):
+               relation_snd_dte.year = time_relation.year(t_to, time)
 
 
 
@@ -253,22 +269,27 @@ def time_relation(first_date, second_date):
 
     return relation_time
 
+def prot2act(protocol, arg, lens, t_first, t_snd):          ##Returns time and amount of args in protocol, lens ALL, first, 5ft, between 
+    if arg == "ALL":
+        prot_f = os.fopen(protocol)
+        while readedline != "":
+            readedline = os.fopen(protocol)
 
 
 
-
-
-
-
-
-def prot2act():
 
 
 
 
 def feedgenerator(Session):
-    # t_from sets leats time for watching back !!
-    t_to = datetime.date 
+    t_to = prot2time(Session, "least")
+    t_to = datetime.date
+    capture_cmp = True
+    while capture_cmp == True:
+        list_friends = user2friends(Session.user)
+        list_topics = user2topics(Session.user)
+        ## need user2 func first and tested
+    
 
 ##########FILEUPLOAD##############
 # Get filename here.

@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python", "Python", "{6D00E64F-FDA6-4899-940F-FD9C38DC3067}"
 	ProjectSection(SolutionItems) = preProject
 		pymain.py = pymain.py
+		vote.py = vote.py
 	EndProjectSection
 EndProject
 Global
