@@ -1,0 +1,35 @@
+            <brshort></brshort>
+            <form>
+                <textarea typeof="text" class="comarea" dir="comm.txt">Commis :D :D :D</textarea>
+            </form>
+            <div>
+                <button type="button" class="collapsible">Kommentare</button>
+                <div class="content">
+                    <div class="comment-container">
+                        <img src="profilbild.png" width="32" height="32">
+                        <div class="comment">
+                            Hallo Welt!
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var coll = document.getElementsByClassName("collapsible");
+                    var i;
+
+                    for (i = 0; i < coll.length; i++) {
+                        coll[i].addEventListener("click", function () {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                            } else {
+                                content.style.display = "block";
+                            }
+                        });
+                    }
+                </script>
+
+            </div>
+        </div>
+</body>
+</html>

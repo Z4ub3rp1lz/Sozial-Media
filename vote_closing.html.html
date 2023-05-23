@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        br {
+            content: "";
+            display: block;
+            height: 2em;
+        }
+
+        brshort {
+            content: "";
+            display: block;
+            height: 10px;
+        }
+
+        li {
+            display: none;
+        }
+
+        input[type=text] {
+            width: 33%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 5px 5px;
+            background-repeat: no-repeat;
+            margin-top: 20px;
+            margin-left: 250px;
+            padding: 12px 20px 12px 35px;
+        }
+
+        .bluep {
+            color: blue;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .redp {
+            color: orangered;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .hype {
+            width: 30px;
+            height: 30px;
+            border: 4px solid red;
+            border-radius: 4px;
+            background-image: url("hype.png");
+            background-position: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+            .hype:hover {
+                border: 4px solid black;
+            }
+
+        .bait {
+            width: 30px;
+            height: 30px;
+            border: 4px solid blue;
+            border-radius: 4px;
+            background-image: url("bait.png");
+            background-position: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+            .bait:hover {
+                border: 4px solid black;
+            }
+
+        .check {
+            width: 30px;
+            height: 30px;
+            border: 4px solid green;
+            border-radius: 4px;
+            background-image: url("check.png");
+            background-position: center;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: -125px;
+        }
+
+            .check:hover {
+                border: 4px solid black;
+            }
+
+        textarea {
+            display: inline-block;
+            width: 60%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            resize: none;
+            text-align: center;
+        }
+
+        textareacomm[input=text] {
+            display: inline-block;
+            width: 260px;
+            height: 30px;
+            box-sizing: border-box;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            background-color: #ffffff;
+            font-size: 10px;
+            color: black;
+        }
+
+        .postlink {
+            display:flex;
+            margin: 0px 0px 0px 20px;
+        }
+
+        .post {
+            width: 300px;
+            height: 460px;
+            box-sizing: border-box;
+            border: 0px;
+            border-radius: 4px;
+            outline: #ffa500 solid 3px;
+            margin-top: 30px;
+            margin-left: 180px;
+            text-align: center;
+        }
+
+        .postpic {
+            width: 250px;
+            height: 250px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 4px;
+            outline: #ffa500 solid 6px;
+            margin: auto;
+            background-image: url("post.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+        }
+
+        .comarea {
+            width: 260px;
+            height: 45px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .commbtn {
+            width: 80px;
+            height: 20px;
+            box-sizing: border-box;
+            border-radius: 3px;
+            border: 1px solid black;
+            background: #ffa500;
+            font-size: 7px;
+            color: black;
+        }
+
+        .collapsible {
+            background-color: white;
+            color: #ffa500;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+            /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+            .active, .collapsible:hover {
+                color: black;
+            }
+
+        
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            box-sizing: border-box;
+            border: 1px solid #ffa500;
+            background-color: lightgray;
+        }
+
+        .comment-container {
+            display: flex;
+            height: 35px;
+            width: 250px;
+            font-size: 8px;
+        }
+        .comment {
+            font-size: 17px;
+            color: black;
+            margin: 6px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            flex-wrap: wrap;
+            flex-direction: column;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #ffa500;
+            overflow-x: hidden;
+            padding-top: 20px;
+            font-family: Impact;
+        }
+
+        /*.sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #ffffff;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #000;
+                } */
+
+        .sidecolred {
+            margin:auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolred:hover {
+                color: red;
+            }
+
+        .sidecolblue {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolblue:hover {
+                color: blue;
+            }
+
+        .sidecolpurple {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolpurple:hover {
+                color: purple;
+            }
+
+        .sidecolgreen {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolgreen:hover {
+                color: green;
+            }
+
+        .sidecolblack {
+            margin: auto;
+            padding-top: 5px;
+            text-decoration: none;
+            font-size: 32px;
+            color: white;
+            display: block;
+        }
+
+            .sidecolblack:hover {
+                color: black;
+            }
+
+
+        .main {
+            margin-left: 180px; /* Same as the width of the sidenav */
+            font-size: 28px; /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        .topping {
+            width: 100%;
+            height: 160px;
+            background-color: #ffa500;
+            box-sizing: border-box;
+            margin-top: -10px;
+        }
+
+        .sidemenu {
+            width: 50px;
+            height: 50px;
+            background-image: url("sidemenu.png");
+            background-repeat: no-repeat;
+            box-sizing: border-box;
+            border: 3px solid white;
+            border-radius: 4px;
+            transition: width 2s, height 4s;
+            transition-duration: 375ms;
+            margin-top: -50px;
+            margin-left: 800px;
+        }
+
+            .sidemenu:hover {
+                width: 120px;
+                height: 120px;
+                background-color: #ffa500;
+                box-sizing: border-box;
+                border: 3px solid black;
+                border-radius: 4px;
+                display: inline-block;
+            }
+
+                .sidemenu:hover li {
+                    transition-delay: 2s;
+                }
+
+        .sidemenu-content {
+            display: none;
+            position: absolute;
+            margin-top: 80px;
+        }
+
+        .sidemenu:hover .sidemenu-content {
+            transition-delay: 2s;
+            display: block;
+        }
+
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href="index.html"><img src="interactLogo.png" width="160" height="160" /></a>
+        <a class="sidecolred" href="friends.html"><img src="friend.png" width="30" height="30"/>Friends</a>
+        <a class="sidecolblue" href="#groups"><img src="group.png" width="30" height="30" />Groups</a>
+        <a class="sidecolgreen" href="#topic"><img src="topic.png" width="30" height="30" />Topic</a>
+        <a class="sidecolpurple" href="#messenger"><img src="messenger.png" width="30" height="30" />Messenger</a>
+        <a class="sidecolblack" href="#profil"><img src="profil.png" width="30" height="30" />Profil</a>
+    </div>
+    <section>
+        <div class="topping">
+            <form>
+                <input type="text" name="search" placeholder="Search..">
+            </form>
+            <div class="sidemenu">
+                <div class="sidemenu-content">
+                    <a href="#darkmode"><img src="darkmode.png" width="32" height="32" /></a>
+                    <a href="#settings"><img src="settings.png" width="32" height="32" /></a>
+                    <a href="#logout"><img src="logout.png" width="32" height="32" /></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main">
+
+        <div class="post">
+            <brshort></brshort>
+            <div class="postlink">
+                <p class="bluep">/Firends</p><p class="redp">[Max Urlaubs Pics]</p>
+            </div>
+            <div class="postpic"></div>
+            <brshort></brshort>
+		<p class="bluep"> Vote closed </p>
+            <brshort></brshort>
+            <form>
+                <textarea typeof="text" class="comarea" dir="comm.txt">Commis :D :D :D</textarea>
+            </form>
+            <div>
+                <button type="button" class="collapsible">Kommentare</button>
+                <div class="content">
+                    <div class="comment-container">
+                        <img src="profilbild.png" width="32" height="32">
+                        <div class="comment">
+                            Hallo Welt!
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var coll = document.getElementsByClassName("collapsible");
+                    var i;
+
+                    for (i = 0; i < coll.length; i++) {
+                        coll[i].addEventListener("click", function () {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                            } else {
+                                content.style.display = "block";
+                            }
+                        });
+                    }
+                </script>
+
+            </div>
+        </div>
+</body>
+</html>
+
+
